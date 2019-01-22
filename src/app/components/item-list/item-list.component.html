@@ -1,0 +1,39 @@
+<mat-card>
+  <button *ngIf="broken" (click)="testBrokenUrls()" class="submit-btn" color="primary" mat-raised-button [disabled]="isTesting">Test</button>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8" style="width:100%">
+
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Url</th>
+      <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastvisited">
+      <th mat-header-cell *matHeaderCellDef>Last Visited</th>
+      <td mat-cell *matCellDef="let element"> {{element.lastVisited | date: 'dd.MM.yyyy HH:mm:ss'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="visitUrl(element.url)">Visit</a> |
+        <a (click)="delete(element.url)">Delete</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</mat-card>

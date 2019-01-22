@@ -1,0 +1,8 @@
+a:visited, a{
+    color:white;
+}
+
+a:hover{
+    cursor: pointer;
+    color:grey;
+}
